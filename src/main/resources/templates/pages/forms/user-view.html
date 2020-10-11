@@ -105,7 +105,6 @@
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     MENU UTAMA user-view.html
-
                                 </p>
                             </a>
 
@@ -212,21 +211,21 @@
                                               </label>
                                         </div>
                                         <div class="form-group">
+                                            <label class="validation-message">Login ID</label>
+                                            <input type="text" th:field="*{user.loginId}" class="form-control" readonly/>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="validation-message">Name</label>
                                             <input type="text" th:field="*{user.nama}" class="form-control" readonly/>
                                         </div>
-
                                         <div class="form-group">
                                             <label class="validation-message">NIM</label>
                                             <input type="text" th:field="*{user.nim}" class="form-control" readonly />
                                         </div>
-
-
                                         <div class="form-group">
                                             <label class="validation-message">Tanggal</label>
                                             <input type="text" th:field="${user.tgl}" name="tgl" class="form-control float-right" id="datepicker" readonly>
                                         </div>
-
 
                                     </div>
                                     

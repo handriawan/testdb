@@ -268,7 +268,7 @@
                                     <tbody>    
                                         <tr style="width: 18px; height:10 px;" th:each="user,no:${users}">
                                             <td th:text="${no.count}"></td>
-                                            <td th:text="${user.id}"></td>
+                                            <td th:text="${user.loginId}"></td>
                                             <td th:text="${user.nama}" ></td>
                                             <td th:text="${user.nim}"></td>
                                             <td th:text="${user.tgl}"></td>
@@ -276,7 +276,7 @@
                                             <td>
                                               
                                                 <a th:href="'/user/view/'+${user.id}" class="btn btn-sm btn-warning">VIEW</a>&nbsp;
-                                                <a th:href="'/changepass/user/'+${user.id}" class="btn btn-sm btn-primary">Change Password</a>&nbsp;
+                                                <a th:href="'user/changepass/'+${user.id}" class="btn btn-sm btn-primary">Change Password</a>&nbsp;
                                                 <button class="btn btn-sm btn-danger" th:onClick="|deleteItem(${user.id})|">Delete</a>
                                             </td>
 

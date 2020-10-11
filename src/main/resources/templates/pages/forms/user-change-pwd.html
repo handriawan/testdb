@@ -171,8 +171,8 @@
                             <h1>USER DETAIL</h1>
                         </div>
                            <div>
-                                 <form autocomplete="off" th:action="@{/user/update}"  method="post" class="form-horizontal" role="form"> 
-                                 <button type="submit" class="btn btn-danger">SAVE</button>     
+                                 <form autocomplete="off" th:action="@{/user/updatepassword}"  method="post" class="form-horizontal" role="form" id="loginForm"> 
+                                <button type="submit" class="btn btn-danger" th:onClick="|validatePassword()|">Submit</button>    
                            </div>       
                     </div>
                 </div>
@@ -188,40 +188,29 @@
                             <div class="card card-primary">
                               
                                  <div class="card-header">   
-                                  <h3 class="card-title">FORM USER DETAIL</h3> 
+                                  <h3 class="card-title">FORM CHANGE PASSWORD</h3> 
                                  </div> 
                               
                                 <!-- /.card-header -->
                                 <!-- form start -->                              
                                 
                                 <input type="hidden" name="id" th:field="*{user.id}" class="form-control" />
+                                <input type="hidden" name="tgl" th:field="*{user.tgl}" class="form-control" id="datepicker"/>
                          
                                     <div class="card-body">
                                         <div class="form-group">
-                                           
-                                              <label  class="validation-message">User ID
-                                                 <input type="text" th:field="*{user.id}" class="form-control" readonly/>
-                                              </label>
+                                              <label  class="validation-message">Password</label>
+                                              <input type="password" name="password" id="password" placeholder="password" class="form-control" />
+        
                                         </div>
                                          <div class="form-group">
-                                            <label class="validation-message">Login ID</label>
-                                            <input type="text" th:field="*{user.loginId}" class="form-control" />
+                                            <label class="validation-message">Confirm Password</label>
+                                            <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Password Confirm" class="form-control" />
+                                           
                                         </div>
-                                        <div class="form-group">
-                                            <label class="validation-message">Name</label>
-                                            <input type="text" th:field="*{user.nama}" class="form-control"/>
-                                        </div>
+                                       
 
-                                        <div class="form-group">
-                                            <label class="validation-message">NIM</label>
-                                            <input type="text" th:field="*{user.nim}" class="form-control"/>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label class="validation-message">Tanggal</label>
-                                            <input type="text" th:field="${user.tgl}" name="tgl" class="form-control float-right" id="datepicker">
-                                        </div>
+                                   
 
 
                                     </div>
@@ -293,7 +282,8 @@
     <script th:src="@{/../../dist/js/demo.js}"></script>
     <!-- Date Picker script -->
     <script th:src="@{/../../plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js}"></script>
-    
+    <!-- JQuery Validation -->
+        <script th:src="@{/../../plugins/jquery-validation/jquery.validate.js}"></script>
     
     
     <script>
@@ -309,7 +299,7 @@
             
             //Date picker
             $('#datepicker').datepicker({
-            	format:'dd-mm-yyyy',
+            	format:'yyyy-mm-dd',
             	autoclose:true
             })
            $('[data-mask]').inputmask()
@@ -367,6 +357,28 @@
         
        
     </script>
+    
+     <script>
+    function validatePassword() {
+        var validator = $("#loginForm").validate({
+            rules: {
+                password: "required",
+                confirmpassword: {
+                    equalTo: "#password"
+                }
+            },
+            messages: {
+                password: " Enter Password",
+                confirmpassword: " Enter Confirm Password Same as Password"
+            }
+        });
+        if (validator.form()) {
+            alert('Sucess');
+        }
+    }
+ 
+    </script>
+        
 </body>
 
 </html>

@@ -11,9 +11,11 @@ public interface UserIface {
 	
 	UserModel selectOneUserEdit(int id);
 	
-	void selectOneUserSimpan(UserModel userModel);
+	void selectOneUserSave(UserModel userModel);
 	
 	void addUser(UserModel userModel);
 	
+	UserModel findUserByLoginId(String loginId);
 	
+	void updatePassword(UserModel userModel);
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tesdb.dao.UserMapper">
+	<resultMap id="UserModel" type="com.tesdb.model.UserModel">
+		<result property="id" column="user_id" />
+		<result property="nama" column="user_name" />
+		<result property="nim" column="nim" />
+		<result property="tgl" column="tgl" />
+		<result property="password" column="password" />
+        <result property="active" column="active" />
+        <result property="loginId" column="login_id" />
+	</resultMap>
+
+    <select id="findUserByLoginId" resultMap="UserModel">
+     SELECT
+        user_id,active,login_id,user_name,password,nim,tgl
+     FROM
+        user
+      <where>
+          <if test="loginId != null and loginId !=''">
+             AND login_id = #{loginId}
+          </if>
+      </where> 
+    </select>
+    
+    <insert id="setUserInfo" parameterType="com.tesdb.model.UserModel" useGeneratedKeys="true" keyProperty="param.id">
+      INSERT INTO user (user_id,user_name,nim,tgl,password,login_id,active) 
+      VALUES (#{param.id},#{param.nama},#{param.nim},#{param.tgl},#{param.password},#{param.loginId},#{param.active})
+    </insert>
+
+
+
+
+</mapper>
