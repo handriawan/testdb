@@ -1,6 +1,10 @@
 package com.tesdb.service;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,12 +13,21 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import com.tesdb.dao.RoleMapper;
 import com.tesdb.dao.UserMapper;
 import com.tesdb.dao.UserRoleMapper;
 import com.tesdb.domain.UserPrincipal;
 import com.tesdb.model.UserModel;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
 public class UserDatabase implements UserDetailsService,UserIface{
@@ -83,8 +96,25 @@ public class UserDatabase implements UserDetailsService,UserIface{
 		
 	}
 
+	 public String exportReport(String reportFormat) throws FileNotFoundException, JRException {
+	        String path = "D:\\SpringHD";
+	        List<UserModel> users = userMapper.ambilSemua();
+	        //load file and compile it
+	        File file = ResourceUtils.getFile("classpath:list_user.jrxml");
+	        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+	        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(users);
+	        Map<String, Object> parameters = new HashMap<>();
+	        parameters.put("createdBy", "Java Techie");
+	        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+	        if (reportFormat.equalsIgnoreCase("html")) {
+	            JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "\\users.html");
+	        }
+	        if (reportFormat.equalsIgnoreCase("pdf")) {
+	            JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\users.pdf");
+	        }
 
-
+	        return "report generated in path : " + path;
+	    }
 	
 
 
