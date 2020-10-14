@@ -1,5 +1,6 @@
 package com.tesdb.controller;
 
+import java.io.FileNotFoundException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -26,6 +27,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tesdb.model.UserModel;
 import com.tesdb.service.UserIface;
+
+import net.sf.jasperreports.engine.JRException;
 
 @Controller
 public class UserController {
@@ -131,6 +134,11 @@ public class UserController {
     	return modelAndView;
     }
     
+    
+    @GetMapping("/report/{format}")
+    public String generateReport(@PathVariable String format) throws FileNotFoundException, JRException {
+    	return userIface.exportReport(format);
+    }
     
 }
    

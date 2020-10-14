@@ -1,7 +1,10 @@
 package com.tesdb.service;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import com.tesdb.model.UserModel;
+
+import net.sf.jasperreports.engine.JRException;
 
 public interface UserIface {
 
@@ -17,5 +20,10 @@ public interface UserIface {
 	
 	UserModel findUserByLoginId(String loginId);
 	
+	String exportReport(String reportFormat) throws FileNotFoundException, JRException ;
+	
 	void updatePassword(UserModel userModel);
+	
+	
+	
 }

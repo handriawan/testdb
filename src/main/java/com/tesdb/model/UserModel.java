@@ -20,9 +20,7 @@ public class UserModel{
 	private int active;
 	private String status;
 	
-	
-	public UserModel(int id, String nama, int nim, String tgl,String loginId) {
-		
+	public UserModel(int id, String nama, int nim, String tgl,String loginId) {	
 		this.id = id;
 		this.nama = nama;
 		this.nim = nim;
@@ -37,8 +35,6 @@ public class UserModel{
 		this.tgl = tgl;
 		this.password = password;
 	}
-	
-	
 	
 	}
 
