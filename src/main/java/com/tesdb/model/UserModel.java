@@ -29,7 +29,7 @@ public class UserModel{
 	}
 
 
-	public UserModel(int id, String tgl, String password) {
+	public UserModel(int id, String password, String tgl) {
 		super();
 		this.id = id;
 		this.tgl = tgl;

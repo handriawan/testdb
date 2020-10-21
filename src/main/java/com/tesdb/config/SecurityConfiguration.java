@@ -43,31 +43,30 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
-//	        http
-//	            .authorizeRequests()
-//	            .antMatchers(
-//	                    "/").permitAll()
-//	            .antMatchers(
-//	                    "/login").permitAll()
-//	                .antMatchers("/home").hasAuthority("ADMIN")
-//	                .antMatchers("/partnumber").hasAuthority("ADMIN")
-//	                
-//	            .anyRequest()
-//	                .authenticated()
-//	                .and().csrf().disable()
-//	            .formLogin()
-//	                .loginPage("/login")
-//	                .failureUrl("/login?error=true")
-//	                .defaultSuccessUrl("/home")
-//	                .usernameParameter("loginId")
-//	                .passwordParameter("password")
-//	            .and()
-//	                .logout()
-//	                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//	            .and()
-//	                .exceptionHandling()
-//	                .accessDeniedPage("/404");
-	    	http.httpBasic().disable();
+	        http
+	            .authorizeRequests()
+	            .antMatchers(
+	                    "/").permitAll()
+	            .antMatchers(
+	                    "/login").permitAll()
+	               // .antMatchers("/hd").hasAuthority("ADMIN")
+	               
+	            .anyRequest()
+	                .authenticated()
+	                .and().csrf().disable()
+	            .formLogin()
+	                .loginPage("/login")
+	                .failureUrl("/login?error=true")
+	                .defaultSuccessUrl("/hd")
+	                .usernameParameter("loginId")
+	                .passwordParameter("password")
+	            .and()
+	                .logout()
+	                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+	            .and()
+	                .exceptionHandling()
+	                .accessDeniedPage("/404");
+	    	//http.httpBasic().disable();
 	      
 	    }
 
